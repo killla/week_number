@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Номер недели</title>
+</head>
+<body>
+    <p>Это сервис расчета номера недели.</p>
+    <p>Введите дату отсчета и искомую дату, для которой необходимо вычислить номер недели. Затем нажмите "Посчитать"</p>
+    <form action="/week/" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="Посчитать">
+    </form>
+    {% if week_number %}
+        <p>Номер недели: {{week_number}}</p>
+    {% endif %}
+</body>
+</html>
