@@ -5,10 +5,16 @@ YEARS = [x for x in range(2010, 2050)]
 
 
 class MainForm(forms.Form):
+    """
+    Форма ввода пользовательских данных
+    """
     start_date = forms.DateField(label='Дата отсчета ', widget=forms.SelectDateWidget(years=YEARS))
     end_date = forms.DateField(label='Искомая дата', widget=forms.SelectDateWidget(years=YEARS))
 
     def clean(self):
+        """
+        Проверка, что дата отсчета не позже, чем искомая дата
+        """
         cleaned_data = super().clean()
         start_date = cleaned_data['start_date']
         end_date = cleaned_data['end_date']
@@ -26,6 +32,9 @@ def count_week(start_date, end_date):
 
 
 def process_dates(request):
+    """
+    Основная функция, которая рендерит первоначальную страницу и обрабатывает пользовательские данные из формы
+    """
     if request.method == 'POST':
         form = MainForm(request.POST)
         if form.is_valid():
